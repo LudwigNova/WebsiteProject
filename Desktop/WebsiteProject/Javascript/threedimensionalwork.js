@@ -15,7 +15,7 @@ function init(){
   const VIEW_ANGLE = 45;
   const ASPECT = WIDTH/HEIGHT;
   const NEAR = 0.1;
-  const FAR = 10000;
+  const FAR = 100000;
 
   const container = document.querySelector('#Container');
 
@@ -35,20 +35,24 @@ function init(){
   //****
   //* Initializing the camera and adding it to the scene
   camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
-  camera.position.z = 100;
+  camera.position.x = 70000;
+  camera.position.y = 40000;
+  camera.position.z = 70000;
   scene.add(camera);
 
   //****
   //* Setting up the camera controls
   controls = new THREE.OrbitControls( camera, renderer.domElement );
   controls.addEventListener( 'change', render );
-  controls.enableZoom = false;
+  controls.enableZoom = true;
+  controls.target.set( 50000, 20000, 50000 );
+
 
   //****
   //* Setting up the variables for the sphere
   const RADIUS = 100;
-  const SEGMENTS = 30;
-  const RINGS = 30;
+  const SEGMENTS = 6;
+  const RINGS = 6;
 
   //****
   //* Initializing the material for the sphere
@@ -58,17 +62,32 @@ function init(){
 
   //****
   //* Creating the sphere and adding it to the scene
-  const sphere = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, SEGMENTS, RINGS), sphereMaterial);
-  sphere.position.z = -400;
-  scene.add(sphere);
+  // const sphere = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, SEGMENTS, RINGS), sphereMaterial);
+  // sphere.position.z = -800;
+  // scene.add(sphere);
+  //
+  // const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, SEGMENTS, RINGS), sphereMaterial);
+  // sphere2.position.x = -1000;
+  // sphere2.position.z = -400;
+  // scene.add(sphere2);
 
   //**
   //*Creating and adding a point light to the scene
-  const pointLight = new THREE.PointLight(0xFFFFFF);
-  pointLight.position.x = 10;
-  pointLight.position.y = 50;
-  pointLight.position.z = 130;
-  scene.add(pointLight);
+  // const pointLight = new THREE.PointLight(0xFFFFFF);
+  // pointLight.position.x = 10;
+  // pointLight.position.y = 50;
+  // pointLight.position.z = 130;
+  // scene.add(pointLight);
+  var light = new THREE.AmbientLight(0xFFFFFF);
+    scene.add(light);
+
+  for(var i=0;i<15000;i++){
+    const spheres = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, SEGMENTS, RINGS), sphereMaterial);
+    spheres.position.x = data[i].x*300;
+    spheres.position.y = data[i].y*300;
+    spheres.position.z = data[i].z*300;
+    scene.add(spheres);
+  }
 }
 
 //**
