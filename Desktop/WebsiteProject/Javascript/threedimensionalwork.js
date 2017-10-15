@@ -47,12 +47,11 @@ function init(){
   controls.enableZoom = true;
   controls.target.set( 50000, 20000, 50000 );
 
-
   //****
   //* Setting up the variables for the sphere
   const RADIUS = 100;
-  const SEGMENTS = 6;
-  const RINGS = 6;
+  const SEGMENTS = 1;
+  const RINGS = 1;
 
   //****
   //* Initializing the material for the sphere
@@ -60,24 +59,6 @@ function init(){
       color: 0xFFFFFF
     });
 
-  //****
-  //* Creating the sphere and adding it to the scene
-  // const sphere = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, SEGMENTS, RINGS), sphereMaterial);
-  // sphere.position.z = -800;
-  // scene.add(sphere);
-  //
-  // const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, SEGMENTS, RINGS), sphereMaterial);
-  // sphere2.position.x = -1000;
-  // sphere2.position.z = -400;
-  // scene.add(sphere2);
-
-  //**
-  //*Creating and adding a point light to the scene
-  // const pointLight = new THREE.PointLight(0xFFFFFF);
-  // pointLight.position.x = 10;
-  // pointLight.position.y = 50;
-  // pointLight.position.z = 130;
-  // scene.add(pointLight);
   var light = new THREE.AmbientLight(0xFFFFFF);
     scene.add(light);
 
@@ -88,6 +69,10 @@ function init(){
     spheres.position.z = data[i].z*300;
     scene.add(spheres);
   }
+
+  document.getElementById("loader").remove();
+  document.getElementById("loadingText").remove();
+
 }
 
 //**
